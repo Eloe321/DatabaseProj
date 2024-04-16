@@ -1,5 +1,6 @@
 package com.example.csit228_f1_v2;
 
+import crud.MySQLConnection;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +22,10 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class HelloApplication extends Application {
     @Override
@@ -100,14 +105,57 @@ public class HelloApplication extends Application {
 
         Button btnLogin = new Button("Log In");
         btnLogin.setFont(Font.font(40));
-        grid.add(btnLogin, 0, 3, 2, 1);
+        grid.add(btnLogin, 0, 4, 2, 1);
+
+        Button btnRegister = new Button("Register");
+        btnRegister.setFont(Font.font(40));
+        grid.add(btnRegister, 0, 3, 2, 1);
 
         btnLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Hello");
+                try(Connection c = MySQLConnection.getConnection();
+                    Statement st = c.createStatement()){
+                    String quer = "SELECT * FROM project";
+                    ResultSet q = st.executeQuery(quer);
+                    while(q.next()){
+                        String name = q.getString("username");
+                        String password = q.getString("password");
+                        if (name.equals(tfUsername.getText()) && password.equals(tmpPassword.getText())){
+                            try {
+                                Parent p = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+                                Scene s = new Scene(p);
+                                stage.setScene(s);
+                                stage.show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+                            Alert a = new Alert(Alert.AlertType.NONE);
+                            a.setAlertType(Alert.AlertType.ERROR);
+                            a.setContentText("Wrong User or Password");
+                            a.show();
+                            tmpPassword.setText("");
+                            tmpPassword.setText("");
+                        }
+
+                    }
+
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        btnRegister.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Hello");
+
                 try {
-                    Parent p = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+
+                    Parent p = FXMLLoader.load(getClass().getResource("register-view.fxml"));
                     Scene s = new Scene(p);
                     stage.setScene(s);
                     stage.show();
@@ -116,6 +164,7 @@ public class HelloApplication extends Application {
                 }
             }
         });
+
 
         Scene scene = new Scene(grid, 700, 500, Color.BLACK);
         stage.setScene(scene);
