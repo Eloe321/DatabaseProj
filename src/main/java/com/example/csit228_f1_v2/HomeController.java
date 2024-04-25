@@ -23,6 +23,8 @@ public class HomeController {
     private ScrollPane toDisplay;
     @FXML
     private Button Create;
+    @FXML
+    private VBox contentBox;
 
     @FXML
     void initialize() {
@@ -51,14 +53,11 @@ public class HomeController {
                 VBox museumBox = new VBox();
                 Label museumNameLabel = new Label(q.getString("name"));
                 Label museumDescriptionLabel = new Label(q.getString("description"));
-                museumBox.getChildren().addAll(museumNameLabel, museumDescriptionLabel);
-
                 ImageView museumImage = new ImageView(new Image(q.getString("URL")));
                 museumImage.setFitWidth(200);
                 museumImage.setFitHeight(200);
-                museumBox.getChildren().add(museumImage);
-                Pane contentPane = (Pane) toDisplay.getContent(); // Assuming content is a Pane
-                contentPane.getChildren().add(museumBox);
+                museumBox.getChildren().addAll(museumNameLabel, museumDescriptionLabel, museumImage);
+                contentBox.getChildren().add(museumBox);
 
             }
 

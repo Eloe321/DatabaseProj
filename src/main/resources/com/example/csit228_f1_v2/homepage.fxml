@@ -20,7 +20,11 @@
             </Label>
          </top>
          <center>
-            <ScrollPane fx:id="toDisplay" onMouseClicked="#OpenModal" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <ScrollPane fx:id="toDisplay" onMouseClicked="#OpenModal" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <content>
+               <VBox fx:id = "contentBox"/>
+            </content>
+            </ScrollPane>
          </center>
          <right>
             <VBox alignment="CENTER" prefHeight="355.0" prefWidth="117.0" BorderPane.alignment="CENTER">
