@@ -3,16 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.RegisterController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="400.0" prefWidth="590.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
          <top>
             <Label text="REGISTER" BorderPane.alignment="CENTER">
                <font>
@@ -25,32 +25,41 @@
                <children>
                   <Label text="Name">
                      <VBox.margin>
-                        <Insets bottom="26.0" />
+                        <Insets bottom="32.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="Bell MT Bold" size="20.0" />
+                     </font>
                   </Label>
                   <Label text="Username">
                      <VBox.margin>
-                        <Insets bottom="26.0" />
+                        <Insets bottom="30.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="Bell MT Bold" size="20.0" />
+                     </font>
                   </Label>
-                  <Label text="Password" />
+                  <Label text="Password">
+                     <font>
+                        <Font name="Bell MT Bold" size="20.0" />
+                     </font></Label>
                </children>
             </VBox>
          </left>
          <center>
             <VBox prefHeight="131.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="RegName">
+                  <TextField fx:id="RegName" prefHeight="38.0" prefWidth="490.0">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="RegUser">
+                  <TextField fx:id="RegUser" prefHeight="38.0" prefWidth="490.0">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="RegPass" />
+                  <PasswordField fx:id="RegPass" prefHeight="38.0" />
                </children>
             </VBox>
          </center>

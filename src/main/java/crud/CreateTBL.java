@@ -1,5 +1,7 @@
 package crud;
 
+import com.example.csit228_f1_v2.MySQLConnection;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,9 +13,9 @@ public class CreateTBL {
 
             String query = "CREATE TABLE IF NOT EXISTS Project (" +
                     "id INT PRIMARY KEY AUTO_INCREMENT," +
-                    "name VARCHAR(50) NOT NULL," +
-                    "username VARCHAR(100) NOT NULL," +
-                    "password VARCHAR(15) NOT NULL)";
+                    "name VARCHAR(256) NOT NULL," +
+                    "username VARCHAR(256) NOT NULL," +
+                    "password VARCHAR(256) NOT NULL)";
 
             st.execute(query);
             System.out.println("Table thy Placed!");

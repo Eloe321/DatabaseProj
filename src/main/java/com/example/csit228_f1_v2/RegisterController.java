@@ -6,11 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import crud.MySQLConnection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class RegisterController {
@@ -28,7 +28,7 @@ public class RegisterController {
     private TextField RegName;
 
     @FXML
-    private TextField RegPass;
+    private PasswordField RegPass;
 
     @FXML
     private TextField RegUser;
@@ -44,20 +44,24 @@ public class RegisterController {
             @Override
             public void handle(ActionEvent event) {
                 try (Connection c = MySQLConnection.getConnection();
-                     PreparedStatement st = c.prepareStatement("INSERT INTO users (name, username, password) VALUES (?, ?, ?)")) {
-                    String name = ;
-                    String user = "nina@gmail.com";
-                    String password = ""
+                     PreparedStatement st = c.prepareStatement("INSERT INTO project (name, username, password) VALUES (?, ?, ?)")) {
+                    String name = RegName.getText();
+                    String user = RegUser.getText();
+                    String password = RegPass.getText();
                     st.setString(1, name);
-                    st.setString(2, email);
+                    st.setString(2, user);
+                    st.setString(3, password);
                     int rowsUsed = st.executeUpdate();
                     if (rowsUsed > 0) {
                         System.out.println("We're In, we inserted this much rows: " + rowsUsed);
+                        HelloApplication.stage.setScene(HelloApplication.OriginalScene);
                     } else
                         System.out.println("You missed Entirely SIR!");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+
+
             }
         });
     }

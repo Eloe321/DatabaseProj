@@ -1,5 +1,7 @@
 package crud;
 
+import com.example.csit228_f1_v2.MySQLConnection;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 

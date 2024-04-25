@@ -1,6 +1,5 @@
 package com.example.csit228_f1_v2;
 
-import crud.MySQLConnection;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,10 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -28,13 +25,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class HelloApplication extends Application {
+    public static Stage stage;
+    public static Scene OriginalScene;
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage prime) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 //        stage.setTitle("Hello!");
 //        stage.setScene(scene);
-
+        stage = prime;
+        CRUDfunctions c = new CRUDfunctions();
+        c.Createtbl("project");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         Text txtWelcome = new Text("Welcome to CIT");
@@ -114,15 +115,18 @@ public class HelloApplication extends Application {
         btnLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                boolean chek = false;
                 System.out.println("Hello");
                 try(Connection c = MySQLConnection.getConnection();
                     Statement st = c.createStatement()){
                     String quer = "SELECT * FROM project";
+
                     ResultSet q = st.executeQuery(quer);
                     while(q.next()){
                         String name = q.getString("username");
                         String password = q.getString("password");
-                        if (name.equals(tfUsername.getText()) && password.equals(tmpPassword.getText())){
+                        if (name.equals(tfUsername.getText()) && password.equals(pfPassword.getText())){
+                            chek = true;
                             try {
                                 Parent p = FXMLLoader.load(getClass().getResource("homepage.fxml"));
                                 Scene s = new Scene(p);
@@ -131,19 +135,20 @@ public class HelloApplication extends Application {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                        }else{
-                            Alert a = new Alert(Alert.AlertType.NONE);
-                            a.setAlertType(Alert.AlertType.ERROR);
-                            a.setContentText("Wrong User or Password");
-                            a.show();
-                            tmpPassword.setText("");
-                            tmpPassword.setText("");
                         }
 
                     }
 
                 }catch (SQLException e){
                     e.printStackTrace();
+                }
+                if(!chek){
+                    Alert a = new Alert(Alert.AlertType.NONE);
+                    a.setAlertType(Alert.AlertType.ERROR);
+                    a.setContentText("Wrong User or Password");
+                    a.show();
+                    tmpPassword.setText("");
+                    tmpPassword.setText("");
                 }
 
             }
@@ -152,7 +157,7 @@ public class HelloApplication extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Hello");
-
+                 OriginalScene = stage.getScene();
                 try {
 
                     Parent p = FXMLLoader.load(getClass().getResource("register-view.fxml"));

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+    <AnchorPane xmlns="http://javafx.com/javafx"
+                xmlns:fx="http://javafx.com/fxml"
+                 fx:id="modalPane" styleClass="modal-pane" prefHeight="200" prefWidth="300">
+            <Button text="Close" onAction="handleClose" layoutX="230" layoutY="150" />
+        <Label fx:id="modalLabel" text="This is a modal content" layoutX="20" layoutY="20" />
+    </AnchorPane>
