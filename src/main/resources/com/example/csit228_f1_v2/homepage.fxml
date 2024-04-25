@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.HomeController">
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.HomeController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
+      <BorderPane prefHeight="550.0" prefWidth="650.0">
          <top>
             <Label text="Museum of Everyday Objects" BorderPane.alignment="CENTER">
                <font>
@@ -22,7 +22,7 @@
          <center>
             <ScrollPane fx:id="toDisplay" onMouseClicked="#OpenModal" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <content>
-               <VBox fx:id = "contentBox"/>
+               <VBox fx:id="contentBox" />
             </content>
             </ScrollPane>
          </center>

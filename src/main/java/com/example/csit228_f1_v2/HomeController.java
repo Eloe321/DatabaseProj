@@ -54,8 +54,9 @@ public class HomeController {
                 Label museumNameLabel = new Label(q.getString("name"));
                 Label museumDescriptionLabel = new Label(q.getString("description"));
                 ImageView museumImage = new ImageView(new Image(q.getString("URL")));
-                museumImage.setFitWidth(200);
-                museumImage.setFitHeight(200);
+                museumImage.setFitWidth(500);
+                museumImage.setFitHeight(400);
+                museumImage.setPreserveRatio(true);
                 museumBox.getChildren().addAll(museumNameLabel, museumDescriptionLabel, museumImage);
                 contentBox.getChildren().add(museumBox);
 

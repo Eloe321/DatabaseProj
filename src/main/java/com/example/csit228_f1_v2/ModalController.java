@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,17 +22,18 @@ public class ModalController implements Initializable {
     public void showModal() throws IOException {
         System.out.println("The modal Pane: " + modalPane);
         if (modalPane == null) {
-            // Load the FXML for the modal content only once
             FXMLLoader loader = new FXMLLoader(getClass().getResource("modal.fxml"));
-            loader.setController(new ModalController());
+            loader.setController(this);
             modalPane = loader.load();
 
-            // Apply CSS styling for the modal window (optional)
-//            modalPane.getStyleClass().add("modal-pane");
         }
 
-        // Add the modal pane to the scene of the main application window
-        stage.getScene().getRoot().getChildrenUnmodifiable().add(modalPane);
+        StackPane modalContainer = new StackPane();
+        modalContainer.getChildren().add(modalPane);
+
+        // Add the modal container to the scene of the main application window
+        stage.getScene().getRoot().getChildrenUnmodifiable().add(modalContainer);
+
     }
 
     @FXML
